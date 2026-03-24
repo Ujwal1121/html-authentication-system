@@ -1,39 +1,271 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Register Page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Create a new account on AuthUI — join for free today." />
+  <title>Register — AuthUI</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
+  <!-- Decorative ambient orbs -->
+  <div class="orb orb-a" aria-hidden="true"></div>
+  <div class="orb orb-b" aria-hidden="true"></div>
 
-    <h2>Registration Page</h2>
+  <main class="auth-wrapper" style="padding:2.5rem 1rem;">
+    <div class="auth-card" style="max-width:475px;">
 
-    <form>
-        <label>Name:</label><br>
-        <input type="text"><br><br>
+      <!-- Brand logo -->
+      <div class="brand-icon" aria-hidden="true">
+        <i class="bi bi-person-plus-fill"></i>
+      </div>
 
-        <label>Email:</label><br>
-        <input type="email"><br><br>
+      <h1 class="auth-title">Create account</h1>
+      <p class="auth-subtitle">Join us today — it's completely free</p>
 
-        <label>Phone Number:</label><br>
-        <input type="tel"><br><br>
+      <!-- Registration Form -->
+      <form id="registerForm" novalidate>
 
-        <label>Password:</label><br>
-        <input type="password"><br><br>
+        <!-- Full Name -->
+        <div class="mb-3">
+          <label for="fullName" class="form-label">Full Name</label>
+          <div class="input-group">
+            <span class="input-group-text" style="border-radius:10px 0 0 10px !important; border-right:none !important;">
+              <i class="bi bi-person"></i>
+            </span>
+            <input
+              type="text"
+              id="fullName"
+              name="fullName"
+              class="form-control"
+              placeholder="John Doe"
+              autocomplete="name"
+              required
+              minlength="2"
+              style="border-radius:0 10px 10px 0 !important;"
+            />
+            <div class="invalid-feedback">Name must be at least 2 characters.</div>
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+        </div>
 
-        <label>Confirm Password:</label><br>
-        <input type="password"><br><br>
+        <!-- Email -->
+        <div class="mb-3">
+          <label for="regEmail" class="form-label">Email address</label>
+          <div class="input-group">
+            <span class="input-group-text" style="border-radius:10px 0 0 10px !important; border-right:none !important;">
+              <i class="bi bi-envelope"></i>
+            </span>
+            <input
+              type="email"
+              id="regEmail"
+              name="email"
+              class="form-control"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+              style="border-radius:0 10px 10px 0 !important;"
+            />
+            <div class="invalid-feedback">Please enter a valid email.</div>
+            <div class="valid-feedback">Looks good!</div>
+          </div>
+        </div>
 
-        <a href="login.html">
-            <button type="button">Register</button>
-        </a>
-    </form>
+        <!-- Phone -->
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone Number</label>
+          <div class="input-group">
+            <span class="input-group-text" style="border-radius:10px 0 0 10px !important; border-right:none !important;">
+              <i class="bi bi-telephone"></i>
+            </span>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              class="form-control"
+              placeholder="+1 555 000 0000"
+              autocomplete="tel"
+              pattern="^\+?[0-9\s\-]{7,15}$"
+              style="border-radius:0 10px 10px 0 !important;"
+            />
+            <div class="invalid-feedback">Enter a valid phone number.</div>
+          </div>
+        </div>
 
-    <br>
+        <!-- Password -->
+        <div class="mb-3">
+          <label for="regPassword" class="form-label">Password</label>
+          <div class="input-group">
+            <input
+              type="password"
+              id="regPassword"
+              name="password"
+              class="form-control"
+              placeholder="Min. 8 characters"
+              autocomplete="new-password"
+              required
+              minlength="8"
+              style="border-radius:10px 0 0 10px !important;"
+            />
+            <span class="input-group-text" id="togglePwd1" role="button" tabindex="0" aria-label="Toggle password visibility">
+              <i class="bi bi-eye" id="eye1"></i>
+            </span>
+            <div class="invalid-feedback">Password must be at least 8 characters.</div>
+          </div>
+          <!-- Password Strength Meter -->
+          <div class="strength-wrap mt-2">
+            <div class="strength-bar" id="sBar"></div>
+          </div>
+          <p class="strength-text" id="sLabel">Password strength</p>
+        </div>
 
-    <a href="login.html">Already have an account?</a>
+        <!-- Confirm Password -->
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <div class="input-group">
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              class="form-control"
+              placeholder="Re-enter password"
+              autocomplete="new-password"
+              required
+              style="border-radius:10px 0 0 10px !important;"
+            />
+            <span class="input-group-text" id="togglePwd2" role="button" tabindex="0" aria-label="Toggle confirm password visibility">
+              <i class="bi bi-eye" id="eye2"></i>
+            </span>
+            <div class="invalid-feedback">Passwords do not match.</div>
+            <div class="valid-feedback">Passwords match!</div>
+          </div>
+        </div>
 
+        <!-- Terms & Conditions -->
+        <div class="mb-3">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="terms" required />
+            <label class="form-check-label" for="terms">
+              I agree to the <a href="#" class="auth-link">Terms of Service</a> and <a href="#" class="auth-link">Privacy Policy</a>
+            </label>
+            <p class="invalid-feedback d-block" id="termsErr" style="display:none !important;"></p>
+          </div>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn-auth" id="registerBtn">
+          <i class="bi bi-person-check me-2"></i>Create Account
+        </button>
+      </form>
+
+      <!-- Footer link -->
+      <p class="auth-footer">
+        Already have an account?&nbsp;
+        <a href="index.html" class="auth-link">Sign in</a>
+      </p>
+
+    </div>
+  </main>
+
+  <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // ── Password visibility toggles ──
+    function makeToggle(btnId, inputId, iconId) {
+      const btn = document.getElementById(btnId);
+      const inp = document.getElementById(inputId);
+      const ico = document.getElementById(iconId);
+      function toggle() {
+        const hidden = inp.type === 'password';
+        inp.type = hidden ? 'text' : 'password';
+        ico.className = hidden ? 'bi bi-eye-slash' : 'bi bi-eye';
+      }
+      btn.addEventListener('click', toggle);
+      btn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') toggle(); });
+    }
+    makeToggle('togglePwd1', 'regPassword', 'eye1');
+    makeToggle('togglePwd2', 'confirmPassword', 'eye2');
+
+    // ── Password Strength Meter ──
+    const pwdInput = document.getElementById('regPassword');
+    const sBar     = document.getElementById('sBar');
+    const sLabel   = document.getElementById('sLabel');
+    const levels   = [
+      { pct: '0%',   bg: 'transparent', txt: 'Password strength' },
+      { pct: '25%',  bg: '#ff6b8a',     txt: 'Weak — try adding numbers & symbols' },
+      { pct: '50%',  bg: '#fdcb6e',     txt: 'Fair — add uppercase letters' },
+      { pct: '75%',  bg: '#a29bfe',     txt: 'Good — almost there!' },
+      { pct: '100%', bg: '#55efc4',     txt: 'Strong 🎉 — great password!' },
+    ];
+
+    pwdInput.addEventListener('input', () => {
+      const v = pwdInput.value;
+      let score = 0;
+      if (v.length >= 8)          score++;
+      if (/[A-Z]/.test(v))        score++;
+      if (/[0-9]/.test(v))        score++;
+      if (/[^A-Za-z0-9]/.test(v)) score++;
+      const { pct, bg, txt } = levels[score];
+      sBar.style.width      = pct;
+      sBar.style.background = bg;
+      sLabel.textContent    = v.length ? txt : 'Password strength';
+      sLabel.style.color    = bg !== 'transparent' ? bg : 'var(--text-muted)';
+    });
+
+    // ── Form Validation ──
+    document.getElementById('registerForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      let valid = true;
+
+      const nameEl    = document.getElementById('fullName');
+      const emailEl   = document.getElementById('regEmail');
+      const pwdEl     = document.getElementById('regPassword');
+      const confirmEl = document.getElementById('confirmPassword');
+      const termsEl   = document.getElementById('terms');
+      const termsErr  = document.getElementById('termsErr');
+      const btn       = document.getElementById('registerBtn');
+
+      [nameEl, emailEl, pwdEl, confirmEl].forEach(el => el.classList.remove('is-invalid', 'is-valid'));
+
+      if (!nameEl.value.trim() || nameEl.value.trim().length < 2) {
+        nameEl.classList.add('is-invalid'); valid = false;
+      } else { nameEl.classList.add('is-valid'); }
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+        emailEl.classList.add('is-invalid'); valid = false;
+      } else { emailEl.classList.add('is-valid'); }
+
+      if (pwdEl.value.length < 8) {
+        pwdEl.classList.add('is-invalid'); valid = false;
+      } else { pwdEl.classList.add('is-valid'); }
+
+      if (!confirmEl.value || confirmEl.value !== pwdEl.value) {
+        confirmEl.classList.add('is-invalid'); valid = false;
+      } else { confirmEl.classList.add('is-valid'); }
+
+      if (!termsEl.checked) {
+        termsErr.textContent = 'You must agree to the terms.';
+        termsErr.style.display = 'block';
+        valid = false;
+      } else {
+        termsErr.style.display = 'none';
+        termsErr.textContent = '';
+      }
+
+      if (valid) {
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Creating account…';
+        setTimeout(() => { window.location.href = 'dashboard.html'; }, 1400);
+      }
+    });
+  </script>
 </body>
-
 </html>
